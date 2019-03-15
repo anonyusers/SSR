@@ -5,7 +5,7 @@
     "local_address": "127.0.0.1",
     "local_port": 1080,
 
-    "password": "m",
+    "password": "bioch9Ae",
     "method": "aes-128-ctr",
     "protocol": "auth_aes128_md5", 
     "protocol_param": "",

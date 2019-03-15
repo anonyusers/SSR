@@ -80,7 +80,7 @@ def find_config():
     def sub_find(file_name):
         if os.path.exists(file_name):
             return file_name
-        # 上级路径下寻找配置文件
+        # 到上级路径下寻找配置文件
         file_name = os.path.join(os.path.abspath('..'), file_name)
         return file_name if os.path.exists(file_name) else None
 
@@ -165,13 +165,13 @@ def get_config(is_local):
 
         if config_path:
             logging.debug('loading config from %s' % config_path)
+            print(config_path)
             with open(config_path, 'rb') as f:
                 try:
                     config = parse_json_in_str(remove_comment(f.read().decode('utf8')))
                 except ValueError as e:
                     logging.error('found an error in config.json: %s', str(e))
                     sys.exit(1)
-
 
         v_count = 0
         for key, value in optlist:
@@ -264,7 +264,7 @@ def get_config(is_local):
         config['server'] = to_str(config.get('server', '0.0.0.0'))
         try:
             config['forbidden_ip'] = \
-                IPNetwork(config.get('forbidden_ip', '127.0.0.0/8,::1/128'))
+                    IPNetwork(config.get('forbidden_ip', '127.0.0.0/8,::1/128'))
         except Exception as e:
             logging.error(e)
             sys.exit(2)
@@ -275,7 +275,7 @@ def get_config(is_local):
             sys.exit(2)
         try:
             config['ignore_bind'] = \
-                IPNetwork(config.get('ignore_bind', '127.0.0.0/8,::1/128,10.0.0.0/8,192.168.0.0/16'))
+                    IPNetwork(config.get('ignore_bind', '127.0.0.0/8,::1/128,10.0.0.0/8,192.168.0.0/16'))
         except Exception as e:
             logging.error(e)
             sys.exit(2)
